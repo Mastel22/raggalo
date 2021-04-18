@@ -1,0 +1,3 @@
+enum ImageSourceType {
+  Comera, Galery
+}

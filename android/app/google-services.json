@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "736222206529",
+    "project_id": "raggalo-app",
+    "storage_bucket": "raggalo-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:736222206529:android:b212dc95b40d9440fa44c0",
+        "android_client_info": {
+          "package_name": "com.example.raggalo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "736222206529-levto81pvilq12pd6ji5dg5o4arvsj4i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.raggalo",
+            "certificate_hash": "2cbb296a839a5f989ac2a22d816a3f79f7648aee"
+          }
+        },
+        {
+          "client_id": "736222206529-bt2gl1kjnvbfpfl59gdi46luibovh9be.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUUo0LHnx1kh7GgJHwovZS5eWTUioDPVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "736222206529-bt2gl1kjnvbfpfl59gdi46luibovh9be.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
