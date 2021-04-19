@@ -81,73 +81,115 @@ class _VetBreedsPageState extends State<VetBreedsPage> {
                           },
                           child: Container(
                             margin: EdgeInsets.symmetric(horizontal: 20),
-                            decoration: BoxDecoration(
-                              color: randomColor,
-                              boxShadow: customShadow,
-                            ),
-                            height: 160,
-                            child: Row(
+                            height: 180,
+                            child: Stack(
                               children: [
-                                Hero(
-                                  tag: items[index].id,
-                                  child: Image.network(
-                                    items[index].image,
-                                    fit: BoxFit.fill,
-                                    width: size.width * 0.48,
+                                Container(
+                                  margin: EdgeInsets.only(
+                                    top: 16,
+                                    bottom: 16,
                                   ),
-                                ),
-                                Expanded(
-                                  child: Container(
-                                    margin: EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 20),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              items[index].name,
-                                              style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.bold,
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: size.width * 0.48,
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          margin: EdgeInsets.symmetric(
+                                              horizontal: 10, vertical: 20),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    items[index].name,
+                                                    style: TextStyle(
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        Text(
-                                          items[index].animal,
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            color: fadedBlack,
-                                            fontWeight: FontWeight.bold,
+                                              Text(
+                                                items[index].animal,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: fadedBlack,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.location_pin,
+                                                    size: 16,
+                                                    color: primaryGreen,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5,
+                                                  ),
+                                                  Text(
+                                                    'Location: ${items[index].location}',
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      color: fadedBlack,
+                                                    ),
+                                                  )
+                                                ],
+                                              )
+                                            ],
                                           ),
                                         ),
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.location_pin,
-                                              size: 16,
-                                              color: primaryGreen,
-                                            ),
-                                            SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              'Location: ${items[index].location}',
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                color: fadedBlack,
-                                              ),
-                                            )
-                                          ],
-                                        )
-                                      ],
+                                      )
+                                    ],
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    boxShadow: customShadow,
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(20),
+                                      bottomRight: Radius.circular(20),
                                     ),
+                                  ),
+                                ),
+                                Container(
+                                  width: size.width * 0.48,
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          color: randomColor,
+                                          boxShadow: customShadow,
+                                          borderRadius:
+                                              BorderRadius.circular(22),
+                                        ),
+                                      ),
+                                      Hero(
+                                        tag: items[index].id,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(22),
+                                            image: DecorationImage(
+                                              image: NetworkImage(
+                                                items[index].image,
+                                              ),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          height: 180,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 )
                               ],
