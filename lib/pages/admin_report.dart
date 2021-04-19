@@ -26,6 +26,9 @@ class _AdminReportPageState extends State<AdminReportPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(
+              height: 32,
+            ),
             StreamBuilder<QuerySnapshot>(
               stream: FirebaseService.firestore
                   .collection("reserved_breeds")
@@ -45,7 +48,7 @@ class _AdminReportPageState extends State<AdminReportPage> {
                     .map((item) => ReservedBreed.fromJson(item.data()))
                     .toList();
 
-                Report<ReservedBreed> breeds = Report(0, items);
+                Report<ReservedBreed> breeds = Report(items.length, items);
                 return ExpandableNotifier(
                   child: Padding(
                     padding: const EdgeInsets.all(10),
@@ -72,7 +75,7 @@ class _AdminReportPageState extends State<AdminReportPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Breeds",
+                                        "Breeds requests",
                                         style: TextStyle(
                                           fontSize: 22,
                                           color: Theme.of(context).primaryColor,
@@ -150,8 +153,14 @@ class _AdminReportPageState extends State<AdminReportPage> {
                 );
               },
             ),
+            SizedBox(
+              height: 32,
+            ),
             StreamBuilder<QuerySnapshot>(
-              stream: FirebaseService.firestore.collection("users").snapshots(),
+              stream: FirebaseService.firestore
+                  .collection("users")
+                  .where("role", isEqualTo: "Vet")
+                  .snapshots(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return Center(
@@ -167,7 +176,7 @@ class _AdminReportPageState extends State<AdminReportPage> {
                     .map((item) => User.fromJson(item.data()))
                     .toList();
 
-                Report<User> users = Report(0, items);
+                Report<User> users = Report(items.length, items);
                 return ExpandableNotifier(
                   child: Padding(
                     padding: const EdgeInsets.all(10),
@@ -194,7 +203,7 @@ class _AdminReportPageState extends State<AdminReportPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Users",
+                                        "Vet requests",
                                         style: TextStyle(
                                           fontSize: 22,
                                           color: Theme.of(context).primaryColor,
@@ -234,11 +243,11 @@ class _AdminReportPageState extends State<AdminReportPage> {
                                 children: <Widget>[
                                   for (User _ in users.items)
                                     ListTile(
-                                      leading: Image.network(
-                                        _.image,
-                                        width: 50,
-                                        height: 50,
-                                        fit: BoxFit.cover,
+                                      leading: CircleAvatar(
+                                        backgroundImage: NetworkImage(
+                                          _.image ??
+                                              "https://res.cloudinary.com/dlwzb2uh3/image/upload/v1611644493/PngItem_307416_ciwoqc.png",
+                                        ),
                                       ),
                                       title: Text(_.names),
                                       subtitle: Column(
@@ -261,7 +270,8 @@ class _AdminReportPageState extends State<AdminReportPage> {
                                     collapsed: collapsed,
                                     expanded: expanded,
                                     theme: const ExpandableThemeData(
-                                        crossFadePoint: 0),
+                                      crossFadePoint: 0,
+                                    ),
                                   ),
                                 );
                               },
