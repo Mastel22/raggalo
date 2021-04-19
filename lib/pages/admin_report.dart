@@ -65,11 +65,6 @@ class _AdminReportPageState extends State<AdminReportPage> {
                               ),
                               child: Row(
                                 children: [
-                                  // Image.asset(
-                                  //   categories[index].iconPath,
-                                  //   scale: 1,
-                                  // ),
-                                  Expanded(child: Container()),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -193,11 +188,6 @@ class _AdminReportPageState extends State<AdminReportPage> {
                               ),
                               child: Row(
                                 children: [
-                                  // Image.asset(
-                                  //   categories[index].iconPath,
-                                  //   scale: 1,
-                                  // ),
-                                  Expanded(child: Container()),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
