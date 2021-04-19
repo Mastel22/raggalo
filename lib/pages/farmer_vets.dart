@@ -112,6 +112,16 @@ class _VetServicesPageState extends State<VetServicesPage> {
                                   },
                                 ),
                                 SizedBox(height: 8),
+                                CheckboxListTile(
+                                  value: withFollowup,
+                                  title: Text("Include follow up"),
+                                  onChanged: (value) {
+                                    setState(() {
+                                      withFollowup = value;
+                                    });
+                                  },
+                                ),
+                                SizedBox(height: 8),
                                 TextFormField(
                                   controller: createdAtController,
                                   decoration: InputDecoration(
