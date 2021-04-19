@@ -54,8 +54,8 @@ class FirebaseService {
         null,
         null,
         bio,
-        double.parse(fee),
-        double.parse(followupFee),
+        fee.length > 0 ? double.parse(fee) : 0.0,
+        followupFee.length > 0 ? double.parse(followupFee) : 0.0,
       );
       await firestore
           .collection("users")

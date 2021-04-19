@@ -92,87 +92,89 @@ class _VetServicesPageState extends State<VetServicesPage> {
                     showDialog(
                       context: context,
                       builder: (ctx) {
-                        return AlertDialog(
-                          title: Text("Request visit"),
-                          content: Form(
-                            key: _formKey,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                TextFormField(
-                                  controller: reasonController,
-                                  decoration: InputDecoration(
-                                    labelText: "Reason",
-                                  ),
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return "This shoud not be empty.";
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                SizedBox(height: 8),
-                                CheckboxListTile(
-                                  value: withFollowup,
-                                  title: Text("Include follow up"),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      withFollowup = value;
-                                    });
-                                  },
-                                ),
-                                SizedBox(height: 8),
-                                TextFormField(
-                                  controller: createdAtController,
-                                  decoration: InputDecoration(
-                                    labelText: "Date",
-                                    suffixIcon: IconButton(
-                                      icon: Icon(Icons.calendar_today),
-                                      onPressed: () {
-                                        _selectDate(context);
-                                      },
+                        return StatefulBuilder(builder: (context, setState) {
+                          return AlertDialog(
+                            title: Text("Request visit"),
+                            content: Form(
+                              key: _formKey,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  TextFormField(
+                                    controller: reasonController,
+                                    decoration: InputDecoration(
+                                      labelText: "Reason",
                                     ),
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return "This shoud not be empty.";
+                                      }
+                                      return null;
+                                    },
                                   ),
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return "This shoud not be empty.";
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                SizedBox(height: 8),
-                              ],
-                            ),
-                          ),
-                          actions: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 16),
-                              child: RaisedButton(
-                                color: Theme.of(context).primaryColor,
-                                onPressed: () {
-                                  if (!_formKey.currentState.validate()) {
-                                    return;
-                                  }
-                                  FirebaseService.requestVisit(
-                                      _profile.user.uid,
-                                      users[index].uid,
-                                      reasonController.text,
-                                      withFollowup,
-                                      DateTime.now().toString());
-                                  reasonController.clear();
-                                  createdAtController.clear();
-                                  Navigator.pop(context);
-                                  Scaffold.of(context).showSnackBar(SnackBar(
-                                    content: Text(
-                                      "Your request has been sent successfully!",
+                                  SizedBox(height: 8),
+                                  CheckboxListTile(
+                                    value: withFollowup,
+                                    title: Text("Include follow up"),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        withFollowup = value;
+                                      });
+                                    },
+                                  ),
+                                  SizedBox(height: 8),
+                                  TextFormField(
+                                    controller: createdAtController,
+                                    decoration: InputDecoration(
+                                      labelText: "Date",
+                                      suffixIcon: IconButton(
+                                        icon: Icon(Icons.calendar_today),
+                                        onPressed: () {
+                                          _selectDate(context);
+                                        },
+                                      ),
                                     ),
-                                  ));
-                                },
-                                child: Text("Submit"),
+                                    validator: (value) {
+                                      if (value.isEmpty) {
+                                        return "This shoud not be empty.";
+                                      }
+                                      return null;
+                                    },
+                                  ),
+                                  SizedBox(height: 8),
+                                ],
                               ),
-                            )
-                          ],
-                        );
+                            ),
+                            actions: [
+                              Padding(
+                                padding: const EdgeInsets.only(right: 16),
+                                child: RaisedButton(
+                                  color: Theme.of(context).primaryColor,
+                                  onPressed: () {
+                                    if (!_formKey.currentState.validate()) {
+                                      return;
+                                    }
+                                    FirebaseService.requestVisit(
+                                        _profile.user.uid,
+                                        users[index].uid,
+                                        reasonController.text,
+                                        withFollowup,
+                                        DateTime.now().toString());
+                                    reasonController.clear();
+                                    createdAtController.clear();
+                                    Navigator.pop(context);
+                                    Scaffold.of(context).showSnackBar(SnackBar(
+                                      content: Text(
+                                        "Your request has been sent successfully!",
+                                      ),
+                                    ));
+                                  },
+                                  child: Text("Submit"),
+                                ),
+                              )
+                            ],
+                          );
+                        });
                       },
                     );
                   },
