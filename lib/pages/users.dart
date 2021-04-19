@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:raggalo/models/breed.dart';
 import 'package:raggalo/models/user.dart';
 import 'package:raggalo/services/firebase.dart';
 
@@ -43,7 +42,14 @@ class _UsersPageState extends State<UsersPage> {
                   ),
                 ),
                 title: Text(users[index].names),
-                subtitle: Text(users[index].role),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(users[index].role),
+                    if (users[index].requests > 0)
+                      Text("Requests: ${users[index].requests}"),
+                  ],
+                ),
                 trailing: PopupMenuButton(
                   itemBuilder: (BuildContext context) {
                     return [

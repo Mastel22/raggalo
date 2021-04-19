@@ -3,6 +3,7 @@ class VetRequest {
   String requesertUid;
   String vetUid;
   String reason;
+  bool withFollowup;
   String status;
   String createAt;
 
@@ -11,6 +12,7 @@ class VetRequest {
     this.requesertUid,
     this.vetUid,
     this.reason,
+    this.withFollowup,
     this.status,
     this.createAt,
   );
@@ -20,6 +22,7 @@ class VetRequest {
     requesertUid = json['requesertUid'];
     vetUid = json['vetUid'];
     reason = json['reason'];
+    withFollowup = json['withFollowup'];
     status = json['status'];
     createAt = json['createAt'];
   }
@@ -30,6 +33,7 @@ class VetRequest {
     data['requesertUid'] = this.requesertUid;
     data['vetUid'] = this.vetUid;
     data['reason'] = this.reason;
+    data['withFollowup'] = this.withFollowup;
     data['status'] = this.status;
     data['createAt'] = this.createAt;
     return data;

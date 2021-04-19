@@ -7,6 +7,9 @@ class User {
   String phone;
   String image;
   String bio;
+  double fee;
+  double followupFee;
+  int requests;
 
   User(
     this.id,
@@ -17,7 +20,10 @@ class User {
     this.phone,
     this.image,
     this.bio,
-  );
+    this.fee,
+    this.followupFee, {
+    this.requests = 0,
+  });
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -28,6 +34,9 @@ class User {
     phone = json['phone'];
     image = json['image'];
     bio = json['bio'];
+    fee = json['fee'];
+    followupFee = json['followupFee'];
+    requests = json['requests'];
   }
 
   Map<String, dynamic> toJson() {
@@ -40,6 +49,9 @@ class User {
     data['phone'] = this.phone;
     data['image'] = this.image;
     data['bio'] = this.bio;
+    data['fee'] = this.fee;
+    data['followupFee'] = this.followupFee;
+    data['requests'] = this.requests;
     return data;
   }
 }

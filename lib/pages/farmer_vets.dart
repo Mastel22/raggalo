@@ -19,6 +19,7 @@ class _VetServicesPageState extends State<VetServicesPage> {
   final _formKey = GlobalKey<FormState>();
 
   DateTime selectedDate = DateTime.now();
+  bool withFollowup = false;
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
@@ -70,7 +71,20 @@ class _VetServicesPageState extends State<VetServicesPage> {
                   ),
                 ),
                 title: Text(users[index].names),
-                subtitle: Text(users[index].bio),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(users[index].bio),
+                    SizedBox(
+                      height: 2,
+                    ),
+                    Text("Fee: ${users[index].fee}"),
+                    SizedBox(
+                      height: 2,
+                    ),
+                    Text("Follow up Fee: ${users[index].followupFee}"),
+                  ],
+                ),
                 trailing: RaisedButton(
                   color: Theme.of(context).primaryColor,
                   textColor: Colors.white,
@@ -133,6 +147,7 @@ class _VetServicesPageState extends State<VetServicesPage> {
                                       _profile.user.uid,
                                       users[index].uid,
                                       reasonController.text,
+                                      withFollowup,
                                       DateTime.now().toString());
                                   reasonController.clear();
                                   createdAtController.clear();

@@ -20,6 +20,8 @@ class _SignupPageState extends State<SignupPage> {
   TextEditingController namesController = TextEditingController();
   TextEditingController idController = TextEditingController();
   TextEditingController bioController = TextEditingController();
+  TextEditingController feeController = TextEditingController();
+  TextEditingController followupFeeController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   Profile _profile;
 
@@ -164,6 +166,38 @@ class _SignupPageState extends State<SignupPage> {
                           return null;
                         },
                       ),
+                      if (selectedRole == "Vet") SizedBox(height: 32),
+                      if (selectedRole == "Vet")
+                        TextFormField(
+                          controller: feeController,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelText: "Fee",
+                            suffixText: "RWF",
+                          ),
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return "This shoud not be empty.";
+                            }
+                            return null;
+                          },
+                        ),
+                      if (selectedRole == "Vet") SizedBox(height: 32),
+                      if (selectedRole == "Vet")
+                        TextFormField(
+                          controller: followupFeeController,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            labelText: "Followup fee",
+                            suffixText: "RWF",
+                          ),
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return "This shoud not be empty.";
+                            }
+                            return null;
+                          },
+                        ),
                       SizedBox(height: 32),
                       TextFormField(
                         controller: bioController,
@@ -204,6 +238,8 @@ class _SignupPageState extends State<SignupPage> {
                                     selectedRole,
                                     idController.text,
                                     bioController.text,
+                                    feeController.text,
+                                    followupFeeController.text,
                                   );
 
                                   setState(() {

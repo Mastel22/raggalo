@@ -31,8 +31,16 @@ class FirebaseService {
     }
   }
 
-  static Future<User> signup(String email, String password, String names,
-      String role, String id, String bio) async {
+  static Future<User> signup(
+    String email,
+    String password,
+    String names,
+    String role,
+    String id,
+    String bio,
+    String fee,
+    String followupFee,
+  ) async {
     var credential = await Firebase.FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password);
     User user;
@@ -46,6 +54,8 @@ class FirebaseService {
         null,
         null,
         bio,
+        double.parse(fee),
+        double.parse(followupFee),
       );
       await firestore
           .collection("users")
@@ -149,8 +159,8 @@ class FirebaseService {
       twilioNumber: '+13177903156',
     );
     await twilioFlutter.sendSMS(
-      toNumber: "+250784190215",
-      messageBody: "Hello from Twilio",
+      toNumber: "+250789390266",
+      messageBody: "There a new client request",
     );
   }
 
@@ -158,6 +168,7 @@ class FirebaseService {
     String requesertUid,
     String vetUid,
     String reason,
+    bool withFollowup,
     String createAt,
   ) async {
     var id = firestore.collection("vet_requests").doc().id;
@@ -166,6 +177,7 @@ class FirebaseService {
       requesertUid,
       vetUid,
       reason,
+      withFollowup,
       "Pending",
       createAt,
     );
@@ -173,6 +185,19 @@ class FirebaseService {
         .collection("vet_requests")
         .doc(id)
         .set(requestVisit.toJson());
+    await firestore
+        .collection("users")
+        .doc(vetUid)
+        .update({"requests": FieldValue.increment(1)});
+    var twilioFlutter = TwilioFlutter(
+      accountSid: 'AC97afb3c1826f66bd6e5e47ba269dc30f',
+      authToken: 'ec83e59c81eac683c77dc7594c8b4630',
+      twilioNumber: '+13177903156',
+    );
+    await twilioFlutter.sendSMS(
+      toNumber: "+250789390266",
+      messageBody: "There a new client request",
+    );
   }
 
   static Future<void> reserveBreed(
@@ -195,6 +220,15 @@ class FirebaseService {
         .collection("reserved_breeds")
         .doc(id)
         .set(reseveredBreeds.toJson());
+    var twilioFlutter = TwilioFlutter(
+      accountSid: 'AC97afb3c1826f66bd6e5e47ba269dc30f',
+      authToken: 'ec83e59c81eac683c77dc7594c8b4630',
+      twilioNumber: '+13177903156',
+    );
+    await twilioFlutter.sendSMS(
+      toNumber: "+250789390266",
+      messageBody: "There a new client request",
+    );
   }
 
   static Future<void> updateRequestStatus(
